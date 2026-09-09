@@ -9,7 +9,7 @@
 ## Submission Links
 
 - **Repository**: [https://github.com/Allanoallashe/savannah-informatics](https://github.com/Allanoallashe/savannah-informatics)
-- **Live Deployment**: [https://clinic-stock-console.vercel.app](https://clinic-stock-console.vercel.app) *(or your deployed URL / Ubuntu server IP)*
+- **Live Deployment**: [https://savannah-informatics-eight.vercel.app](https://savannah-informatics-eight.vercel.app) (Direct Login: [/login](https://savannah-informatics-eight.vercel.app/login))
 - **Deployment Branch**: `main`
 
 ---
@@ -25,13 +25,16 @@
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/username/clinic-stock-console.git
-cd clinic-stock-console
+git clone https://github.com/Allanoallashe/savannah-informatics.git
+cd savannah-informatics
 
-# 2. Install dependencies (husky git hooks set up automatically)
+# 2. Configure environment (optional, defaults to DummyJSON)
+cp .env.example .env.local
+
+# 3. Install dependencies
 npm install
 
-# 3. Start development server
+# 4. Start development server
 npm run dev
 ```
 
@@ -231,8 +234,9 @@ The design system preserves the visual tokens configured in `tailwind.config.js`
 
 ## Deployment Details
 
-- **Provider**: Vercel (or Docker container on Ubuntu Server)
-- **Production URL**: [https://clinic-stock-console.vercel.app](https://clinic-stock-console.vercel.app)
+- **Provider**: Vercel (Edge deployment) & Docker Container on Ubuntu Server
+- **Production URL**: [https://savannah-informatics-eight.vercel.app](https://savannah-informatics-eight.vercel.app)
+- **Direct Login**: [https://savannah-informatics-eight.vercel.app/login](https://savannah-informatics-eight.vercel.app/login)
 - **Deployment Trigger Branch**: `main`
 
 ## CI/CD Pipeline (`.github/workflows/deploy.yml`)
