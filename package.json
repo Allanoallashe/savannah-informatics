@@ -7,10 +7,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "format:check": "prettier --check .",
-    "format:write": "prettier --write .",
+    "format:check": "prettier --check . --ignore-unknown",
+    "format:write": "prettier --write . --ignore-unknown",
     "test": "vitest run",
     "test:watch": "vitest"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": false,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "printWidth": 100,
+    "endOfLine": "auto"
   },
   "dependencies": {
     "clsx": "^2.1.1",
