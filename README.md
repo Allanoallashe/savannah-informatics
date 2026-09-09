@@ -235,7 +235,7 @@ The design system preserves the visual tokens configured in `tailwind.config.js`
 - **Production URL**: [https://clinic-stock-console.vercel.app](https://clinic-stock-console.vercel.app)
 - **Deployment Trigger Branch**: `main`
 
-## CI/CD Pipeline (`.github/workflows/ci.yml`)
+## CI/CD Pipeline (`.github/workflows/deploy.yml`)
 
 The repository runs a GitHub Actions workflow that executes on every pull request and on pushes to `main`:
 
