@@ -1,0 +1,80 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@theme {
+  --color-canvas: #f3f5f8;
+  --color-surface: #ffffff;
+  --color-subtle: #edf1f5;
+  --color-line: #d5dce5;
+  --color-line-strong: #a7b3c1;
+  --color-ink: #0f1f2e;
+  --color-body: #324a61;
+  --color-muted: #5f7387;
+
+  --color-primary: #0e4c7e;
+  --color-primary-hover: #0a3a61;
+  --color-primary-subtle: #e6eef6;
+
+  --color-accent: #0f6e62;
+  --color-accent-hover: #0b564c;
+  --color-accent-subtle: #e2f0ee;
+
+  --color-success: #15803d;
+  --color-success-subtle: #e8f5ec;
+
+  --color-danger: #b42318;
+  --color-danger-subtle: #fcebe9;
+
+  --color-warning: #a85b08;
+  --color-warning-subtle: #fbf1e4;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --font-size-meta: 0.75rem;
+  --font-size-meta--line-height: 1.05rem;
+
+  --shadow-card: 0 1px 2px rgba(15, 31, 46, 0.06);
+  --shadow-pop: 0 8px 24px rgba(15, 31, 46, 0.14);
+
+  --ease-exit: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #f3f5f8;
+  color: #324a61;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Keyboard-first: a single, unmistakable focus treatment everywhere */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #0f6e62;
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
