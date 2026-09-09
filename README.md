@@ -8,8 +8,8 @@
 
 ## Submission Links
 
-- **Repository**: [https://github.com/username/clinic-stock-console](https://github.com/username/clinic-stock-console) _(update with your repo URL)_
-- **Live Deployment**: [https://clinic-stock-console.vercel.app](https://clinic-stock-console.vercel.app) _(or your deployed URL / Ubuntu server IP)_
+- **Repository**: [https://github.com/Allanoallashe/savannah-informatics](https://github.com/Allanoallashe/savannah-informatics)
+- **Live Deployment**: [https://clinic-stock-console.vercel.app](https://clinic-stock-console.vercel.app) *(or your deployed URL / Ubuntu server IP)*
 - **Deployment Branch**: `main`
 
 ---
