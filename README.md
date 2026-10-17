@@ -75,11 +75,15 @@ The application is structured into atomic primitives, composite feature componen
 ```
 app/
  ├── layout.tsx                     # Global HTML root, font injection (Inter), AuthProvider
- ├── page.tsx                       # Auth-aware redirect router (/stock or /login)
  ├── login/page.tsx                 # Authentication screen
  ├── stock/page.tsx                 # Paginated catalogue console with search, filter, sort
  └── stock/item/[id]/page.tsx       # Dedicated item detail & physical count correction
 ```
+
+The root and protected stock redirects are handled by the Next.js 16
+[`proxy.ts`](./proxy.ts) request boundary. It performs an optimistic
+refresh-cookie check before rendering; `AuthProvider` still validates the
+session in the browser.
 
 ### Screen Breakdown:
 
@@ -262,6 +266,12 @@ graph LR
 3. **Commitlint Enforcement** (`npx commitlint`): Validates Conventional Commits on pull requests and through the local Husky `commit-msg` hook.
 4. **Automated Unit & Integration Tests** (`npm run test`): Exercises search cancellation, URL state restoration, stock correction, and failure recovery.
 5. **Production Build Compilation** (`npm run build`): Validates TypeScript types and Turbopack bundle creation.
+
+The shared [`NetworkStatusStrip`](./components/NetworkStatusStrip.tsx) shows
+offline, slow-connection, and restored-connection feedback at the bottom of
+the screen. It uses browser online/offline events and the Network Information
+API when available; request loading and retry states remain the source of truth
+when a browser does not expose connection-quality information.
 
 ## Docker Deployment (Ubuntu Server Alternative)
 

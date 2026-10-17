@@ -2,16 +2,15 @@
 
 import React from "react";
 import Link from "next/link";
-import { BoxesIcon, LogOutIcon, WifiOffIcon } from "lucide-react";
+import { BoxesIcon, LogOutIcon } from "lucide-react";
 import { useAuth } from "@/features/auth/context/AuthContext";
+import { NetworkStatusStrip } from "@/components/NetworkStatusStrip";
 
 interface AppShellProps {
-  /** Shown in the header as the current context, e.g. "Ward 4 tablet". */
-  offline?: boolean;
   children: React.ReactNode;
 }
 
-export function AppShell({ offline = false, children }: AppShellProps) {
+export function AppShell({ children }: AppShellProps) {
   const { user, logout } = useAuth();
   const username = user?.username || "j.okafor";
 
@@ -31,12 +30,6 @@ export function AppShell({ offline = false, children }: AppShellProps) {
           <p className="hidden text-sm text-muted sm:block">Ward 4 · Supplies</p>
 
           <div className="ml-auto flex items-center gap-2">
-            {offline && (
-              <span className="flex items-center gap-1.5 rounded border border-warning/40 bg-warning-subtle px-2 py-1 text-meta font-medium text-warning">
-                <WifiOffIcon aria-hidden="true" className="h-3.5 w-3.5" />
-                Weak signal
-              </span>
-            )}
             <span className="hidden text-sm text-body sm:block">{username}</span>
             <button
               type="button"
@@ -60,6 +53,7 @@ export function AppShell({ offline = false, children }: AppShellProps) {
           <span>Savannah Informatics Engineering Assessment</span>
         </div>
       </footer>
+      <NetworkStatusStrip />
     </div>
   );
 }

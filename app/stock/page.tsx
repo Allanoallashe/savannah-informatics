@@ -39,7 +39,7 @@ function StockListContent() {
   const isEmpty = state === "empty";
 
   return (
-    <AppShell offline={isError}>
+    <AppShell>
       <div className="flex flex-col gap-4">
         <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-1">
           <div>
