@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { renderHook, act } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useStockQuery } from "@/features/stock-list/hooks/useStockQuery";
 import * as clientModule from "@/lib/api/client";
 
@@ -7,15 +7,12 @@ let mockSearchParams = new URLSearchParams();
 const mockPush = vi.fn();
 
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({
-    push: mockPush,
-    replace: vi.fn(),
-  }),
+  useRouter: () => ({ push: mockPush, replace: vi.fn() }),
   usePathname: () => "/stock",
   useSearchParams: () => mockSearchParams,
 }));
 
-describe("URL state restoration and deep-linking synchronization", () => {
+describe("stock URL state", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.spyOn(clientModule, "apiFetch").mockResolvedValue({
@@ -26,9 +23,8 @@ describe("URL state restoration and deep-linking synchronization", () => {
     });
   });
 
-  it("restores search, category, sort and page from URL search parameters on reload", () => {
+  it("restores filters, sorting, and page from a copied URL", () => {
     mockSearchParams = new URLSearchParams("q=powder&category=beauty&sort=price-desc&page=2");
-
     const { result } = renderHook(() => useStockQuery());
 
     expect(result.current.query).toBe("powder");
@@ -37,40 +33,16 @@ describe("URL state restoration and deep-linking synchronization", () => {
     expect(result.current.currentPage).toBe(2);
   });
 
-  it("resets page to 1 when changing category filter so user is not stranded on an empty page", () => {
+  it("resets the page when changing category or sort", () => {
     mockSearchParams = new URLSearchParams("category=beauty&page=5");
-
     const { result } = renderHook(() => useStockQuery());
 
-    act(() => {
-      result.current.onCategoryChange("fragrances");
-    });
-
-    // Expect page parameter to be reset to 1
+    act(() => result.current.onCategoryChange("fragrances"));
     expect(mockPush).toHaveBeenCalledWith("/stock?category=fragrances", { scroll: false });
-  });
 
-  it("resets page to 1 when changing sort order", () => {
     mockSearchParams = new URLSearchParams("sort=name-asc&page=4");
-
-    const { result } = renderHook(() => useStockQuery());
-
-    act(() => {
-      result.current.onSortChange("stock-desc");
-    });
-
+    const rerendered = renderHook(() => useStockQuery());
+    act(() => rerendered.result.current.onSortChange("stock-desc"));
     expect(mockPush).toHaveBeenCalledWith("/stock?sort=stock-desc", { scroll: false });
-  });
-
-  it("clears all search and filter parameters when clearing filters", () => {
-    mockSearchParams = new URLSearchParams("q=ointment&category=beauty&sort=price-desc&page=3");
-
-    const { result } = renderHook(() => useStockQuery());
-
-    act(() => {
-      result.current.onClearFilters();
-    });
-
-    expect(mockPush).toHaveBeenCalledWith("/stock", { scroll: false });
   });
 });

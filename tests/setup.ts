@@ -7,7 +7,6 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 
-// Polyfill window.matchMedia for responsive components
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({

@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@config "../tailwind.config.js";
 
 @theme {
   --color-canvas: #f3f5f8;

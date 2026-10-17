@@ -51,7 +51,7 @@ The console integrates with the live DummyJSON authentication system. You can us
 ### Verification & Tooling Scripts
 
 ```bash
-# Run Vitest unit & integration test suite (debounce race condition, stock save, URL sync)
+# Run meaningful unit and integration tests
 npm run test
 
 # Check code formatting with Prettier
@@ -144,7 +144,7 @@ We separate state into three distinct tiers based on lifecycle and ownership:
 
 ## 4. Design System, Tokens, Layout & Typography
 
-The design system preserves the visual tokens configured in `tailwind.config.js` and `app/globals.css`:
+The design system keeps its Tailwind v4 design tokens in `app/globals.css`; there is no separate legacy Tailwind configuration file:
 
 - **Curated Palette**:
   - `canvas`: `#F3F5F8` (neutral clinic background)
@@ -259,8 +259,8 @@ graph LR
 
 1. **Prettier Format Check** (`npm run format:check`): Fails if any file has formatting discrepancies.
 2. **ESLint Validation** (`npm run lint`): Enforces Next.js core web vitals, strict equality (`eqeqeq`), and TypeScript hygiene.
-3. **Commitlint Enforcement** (`npx commitlint`): Validates Conventional Commits (e.g. `feat:`, `fix:`, `chore:`) on PR branches.
-4. **Automated Unit & Integration Tests** (`npm run test`): Executes Vitest test suite.
+3. **Commitlint Enforcement** (`npx commitlint`): Validates Conventional Commits on pull requests and through the local Husky `commit-msg` hook.
+4. **Automated Unit & Integration Tests** (`npm run test`): Exercises search cancellation, URL state restoration, stock correction, and failure recovery.
 5. **Production Build Compilation** (`npm run build`): Validates TypeScript types and Turbopack bundle creation.
 
 ## Docker Deployment (Ubuntu Server Alternative)

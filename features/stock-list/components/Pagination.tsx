@@ -11,15 +11,17 @@ export interface PaginationProps {
 }
 
 function pageWindow(page: number, totalPages: number): Array<number | "gap"> {
-  if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1);
+  if (totalPages <= 7) return Array.from({ length: totalPages }, (_, index) => index + 1);
   const pages = new Set<number>([1, totalPages, page, page - 1, page + 1]);
-  const list = [...pages].filter((p) => p >= 1 && p <= totalPages).sort((a, b) => a - b);
-  const out: Array<number | "gap"> = [];
-  list.forEach((p, index) => {
-    if (index > 0 && p - (list[index - 1] as number) > 1) out.push("gap");
-    out.push(p);
+  const list = [...pages]
+    .filter((value) => value >= 1 && value <= totalPages)
+    .sort((a, b) => a - b);
+  const entries: Array<number | "gap"> = [];
+  list.forEach((value, index) => {
+    if (index > 0 && value - list[index - 1] > 1) entries.push("gap");
+    entries.push(value);
   });
-  return out;
+  return entries;
 }
 
 export function Pagination({
@@ -50,7 +52,7 @@ export function Pagination({
           type="button"
           onClick={() => onPageChange(page - 1)}
           disabled={page <= 1}
-          className="flex h-10 items-center gap-1 rounded border border-line-strong bg-surface px-2.5 text-sm font-medium text-primary transition-colors duration-150 ease-exit hover:bg-primary-subtle hover:border-primary disabled:cursor-not-allowed disabled:border-line disabled:text-muted disabled:hover:bg-surface"
+          className="flex h-10 items-center gap-1 rounded border border-line-strong bg-surface px-2.5 text-sm font-medium text-primary transition-colors duration-150 ease-exit hover:border-primary hover:bg-primary-subtle disabled:cursor-not-allowed disabled:border-line disabled:text-muted disabled:hover:bg-surface"
         >
           <ChevronLeftIcon aria-hidden="true" className="h-4 w-4" />
           <span className="hidden sm:inline">Previous</span>
@@ -72,7 +74,7 @@ export function Pagination({
                     "h-10 min-w-[40px] rounded border px-2 text-sm font-semibold num transition-colors duration-150 ease-exit",
                     entry === page
                       ? "border-primary bg-primary text-white"
-                      : "border-line-strong bg-surface text-primary hover:bg-primary-subtle hover:border-primary"
+                      : "border-line-strong bg-surface text-primary hover:border-primary hover:bg-primary-subtle"
                   )}
                 >
                   {entry}
@@ -87,7 +89,7 @@ export function Pagination({
           type="button"
           onClick={() => onPageChange(page + 1)}
           disabled={page >= totalPages}
-          className="flex h-10 items-center gap-1 rounded border border-line-strong bg-surface px-2.5 text-sm font-medium text-primary transition-colors duration-150 ease-exit hover:bg-primary-subtle hover:border-primary disabled:cursor-not-allowed disabled:border-line disabled:text-muted disabled:hover:bg-surface"
+          className="flex h-10 items-center gap-1 rounded border border-line-strong bg-surface px-2.5 text-sm font-medium text-primary transition-colors duration-150 ease-exit hover:border-primary hover:bg-primary-subtle disabled:cursor-not-allowed disabled:border-line disabled:text-muted disabled:hover:bg-surface"
         >
           <span className="hidden sm:inline">Next</span>
           <ChevronRightIcon aria-hidden="true" className="h-4 w-4" />
